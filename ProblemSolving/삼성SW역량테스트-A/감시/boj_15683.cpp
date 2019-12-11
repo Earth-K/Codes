@@ -65,7 +65,6 @@ void setVisible(const vector<Cctv>& tvs){
         nowR = tv.r;
         nowC = tv.c;
         nowDir = tv.dir;
-        map[nowR][nowC] = tv.type;
         if(tv.type == 1){
             fillWay(nowR,nowC,(nowDir+1)%4);
         }
@@ -93,7 +92,7 @@ void setVisible(const vector<Cctv>& tvs){
 void initMap(){
   for(int i=0; i<N ;i++){
         for(int j=0 ;j<M ;j++){
-            if(map[i][j] != 6)
+            if(map[i][j] == -1)
                 map[i][j] = 0;
         }
     }
@@ -102,7 +101,8 @@ void fillWay(int nowR, int nowC, int dir){
     int nextR = nowR+dr[dir];
     int nextC = nowC+dc[dir];
     while (chkValid(nextR, nextC)){
-        map[nextR][nextC] = -1;
+        if(!(1<=map[nextR][nextC]&&map[nextR][nextC]<=5))
+            map[nextR][nextC] = -1;
         nextR += dr[dir];
         nextC += dc[dir];
     }
