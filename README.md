@@ -1,6 +1,6 @@
-CPP
+Codes
 ===
-**C++ 소스 코드를 정리하기 위한 repository입니다.**
+**소스 코드를 정리하기 위한 repository입니다.**
 
 
 폴더 설명
