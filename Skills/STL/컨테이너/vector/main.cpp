@@ -9,7 +9,7 @@ void printVt(const vector<int>& vt);
 int main(){
     int n;
     cin >> n;
-    vector<int> vt(n+1, 0);
+    vector<int> vt(n, 0);
     vector<int> resVt1 = meetRequire1(vt);
     vector<int> resVt2 = meetRequire2(resVt1);
     printVt(resVt2);
@@ -19,10 +19,10 @@ int main(){
 
 vector<int> meetRequire1(const vector<int>& vt){
     vector<int> retVt(vt);
-    for(int i=0; i<retVt.size(); i+=5){
+    int end = retVt.size();
+    for(int i=0; i<end; i+=5){
         retVt[i] = 1;
     }
-    int end = vt.size();
     if(retVt.back() != 1){
         int cnt = 1;
         while(retVt[end-1-cnt] != 1){
