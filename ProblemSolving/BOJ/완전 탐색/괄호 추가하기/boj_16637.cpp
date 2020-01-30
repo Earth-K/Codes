@@ -24,7 +24,7 @@ void solve(long long result, int nowOpIdx){
     long long res1 = calc(ops[nowOpIdx], result, nums[nowOpIdx+1]);
     solve(res1, nowOpIdx+1);
     
-    if(nowOpIdx+2 < nums.size()){
+    if(nowOpIdx+1 < ops.size()){
         long long res2 = calc(ops[nowOpIdx+1], nums[nowOpIdx+1], nums[nowOpIdx+2]);
         solve(calc(ops[nowOpIdx],result,res2), nowOpIdx+2);
     }
