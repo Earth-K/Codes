@@ -1,38 +1,55 @@
 #include<iostream>
-#include<vector>
 using namespace std;
-int map[31][11];
+int N,M,H,ladder[31][12], answer=987654321;
+bool isAnswer(){
+    for(int c=1; c<=N; c++){
+        int nowR = 1;
+        int nowC = c;
+        while(nowR<=H){
+            if(ladder[nowR][nowC] == 1)
+                nowC += 1;
+            else if(ladder[nowR][nowC-1] == 1)
+                nowC -= 1;
+            nowR += 1;
+        }
+        if(nowC != c) 
+            return false;
+    }
+    return true;
+}
+void solve(int cnt, int startIdx){
+    if(cnt>=4){
+        return;
+    }
+    if(isAnswer()){
+        if(answer > cnt)
+            answer = cnt;
+        return;
+    }
 
-vector<int> arr;
-
+    for(int a=startIdx; a<=H; a++){
+        for(int b=1; b<N; b++){
+            if(ladder[a][b] == 0 && ladder[a][b-1] == 0 && ladder[a][b+1] == 0){
+                ladder[a][b] = 1;
+                solve(cnt+1, a);
+                ladder[a][b] = 0;
+            }
+        }
+    }
+}
 int main(){
-    int N,M,H;
+    //freopen("input.txt","r",stdin);
     cin>>N>>M>>H;
     for(int i=0,a,b; i<M; i++){
         cin>>a>>b;
-        map[a][b] = 1;
-        map[a][b+1] = 1;
-    }
-    for(int i=1; i<=H; i++){
-        for(int j=1; j<=N; j++){
-            cout<<map[i][j];
-        }
-        cout<<endl;
+        ladder[a][b] = 1;
     }
     
-    for(int c=1; c<=N; c++){
-        int nowC=c;
-        int nowR=1;
-        while(nowR<=H){
-            if(map[nowR][nowC] == 1){
-                if(map[nowR][nowC+1] == 1)
-                    nowC += 1;
-                else if(map[nowR][nowC-1] == 1)
-                    nowC -= 1;
-            }
-            nowR += 1;
-        }
-        cout<<nowC<<endl;
-    }
+    solve(0, 1);
+
+    if(answer == 987654321)
+        cout<<"-1";
+    else
+        cout<<answer;
     return 0;
 }
