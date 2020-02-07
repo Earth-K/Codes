@@ -65,7 +65,3 @@ int main(){
     cout<<solve(map);
     return 0;
 }
-
-
-
-
