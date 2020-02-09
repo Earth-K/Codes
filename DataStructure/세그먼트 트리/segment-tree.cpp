@@ -3,6 +3,19 @@
 using namespace std;
 long long *tree;
 long long A[10] = {1,2,3,4,5,6,7,8,9,10};
+
+long long sum(int index, int start, int end, int left, int right){
+    if(left>end || end<right)
+        return 0;
+    else if(start <= left && right <= end){
+        return tree[index];
+    }
+    else{
+        int mid = (left+right)>>1;
+        return sum(index*2+1, start, mid, left, right) + sum(index*2+2, mid+1, end, left, right);
+    }
+}
+
 long long init(int index, int start, int end){
     if(start == end)
         tree[index] = A[start];
@@ -12,18 +25,24 @@ long long init(int index, int start, int end){
     }
     return tree[index];
 }
+
 int main(){
     int N = 10;
     int h = ceil(log2(N));//long(N) == 3.xxx
-    tree = new long long[1<<(h+1)];
+    tree = new long long[1<<(h+1)]; //트리 크기 2^(h+1)
     for(int i=0; i<1<<(h+1); i++){
         tree[i] = -1;
     }
-    cout<<(1<<(h+1))<<endl<<endl;
+
+    cout<<"h : "<<(1<<(h+1))<<endl<<endl;
+
     init(0,0,N-1);
+    
     for(int i=0; i< (1<<(h+1)); i++){
         cout<<tree[i]<<"\n";
     }
+
+    cout<<"sum 0 to N-1 : "<<sum(0,0,N-1,0,N-1)<<endl<<endl;
 
     return 0;
 }
