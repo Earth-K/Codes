@@ -4,6 +4,21 @@ using namespace std;
 long long *tree;
 long long A[10] = {1,2,3,4,5,6,7,8,9,10};
 
+void update(int changed_idx, int diff, int index, int start, int end){
+    
+    if(changed_idx<start || end<changed_idx)
+        return;
+
+    tree[index] += diff;
+
+    if(start == end)
+        return;
+
+    int mid = (start+end)>>1;
+    update(changed_idx, diff, index*2+1, start, mid);
+    update(changed_idx, diff, index*2+2, mid+1, end);
+}
+
 long long sum(int index, int start, int end, int left, int right){
     if(left>end || end<right)
         return 0;
@@ -43,6 +58,10 @@ int main(){
     }
 
     cout<<"sum 0 to N-1 : "<<sum(0,0,N-1,0,N-1)<<endl<<endl;
+    
+    int num = 6;
+    update(0,num-A[0],0,0,N-1);
 
+    cout<<"sum 0 to N-1 : "<<sum(0,0,N-1,0,N-1)<<endl<<endl;
     return 0;
 }
