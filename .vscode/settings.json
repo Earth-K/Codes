@@ -5,6 +5,8 @@
         "string": "cpp",
         "vector": "cpp",
         "xstring": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "*.tcc": "cpp",
+        "list": "cpp"
     }
 }
