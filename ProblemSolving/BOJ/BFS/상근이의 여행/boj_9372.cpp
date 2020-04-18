@@ -2,9 +2,12 @@
 #include<vector>
 #include<queue>
 using namespace std;
-int N,M,T,visitedNum;
 
+int N,M,T;
 vector<int> adj[1001];
+
+/*  간선의 개수를 세어주는 함수, 
+    bfs로 구현했으나 사실 정점의 개수-1을 리턴해도 됨. */
 int bfs(){
     int ret = 0;
     bool visited[1001] = {false,};
@@ -39,6 +42,5 @@ int main(){
         }
         cout<<bfs()<<endl;
     }
-
     return 0;
 }
