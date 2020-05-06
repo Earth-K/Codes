@@ -5,32 +5,24 @@
 #include<set>
 using namespace std;
 
-set<string> s;
-bool idxCheck[9];
+set<vector<int>> s;
+bool check[9];
 
 void dfs(const vector<int>& numbers, int m, vector<int>& ans){
     if(ans.size() == m){
-        string str;
-        for(int i=0; i<ans.size(); i++)
-            str += to_string(ans[i]);
-        if(s.find(str) != s.end()) return;
-
-        s.insert(str);
-        for(int num : ans)
-            cout<<num<<" ";
-        cout<<"\n";
+        s.insert(ans);
         return;
     }
 
     for(int i=0; i<numbers.size(); i++){
-        if(idxCheck[i]) continue;
+        if(check[i]) continue;
         
-        idxCheck[i] = true;
+        check[i] = true;
         ans.push_back(numbers[i]);
 
         dfs(numbers,m,ans);
 
-        idxCheck[i] = false;
+        check[i] = false;
         ans.pop_back();
     }
 }
@@ -45,5 +37,11 @@ int main(){
     }
     sort(numbers.begin(), numbers.end());
     dfs(numbers,m,ans);
+    
+    for(vector<int> ans : s){
+        for(int num : ans)
+            cout<<num<<" ";
+        cout<<"\n";
+    }
     return 0;
 }
