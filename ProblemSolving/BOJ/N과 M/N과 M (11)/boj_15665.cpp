@@ -4,7 +4,7 @@
 #include<algorithm>
 using namespace std;
 
-void dfs(const vector<int>& numbers, int m, vector<int>& ans, int idx){
+void dfs(const vector<int>& numbers, int m, vector<int>& ans){
     if(ans.size() == m){
         for(int num : ans)
             cout<<num<<" ";
@@ -14,7 +14,7 @@ void dfs(const vector<int>& numbers, int m, vector<int>& ans, int idx){
 
     for(int i=0; i<numbers.size(); i++){
         ans.push_back(numbers[i]);
-        dfs(numbers,m,ans,i);
+        dfs(numbers,m,ans);
         ans.pop_back();
     }
 }
@@ -29,6 +29,6 @@ int main(){
             numbers.push_back(num);
     }
     sort(numbers.begin(), numbers.end());
-    dfs(numbers,m,ans,0);
+    dfs(numbers,m,ans);
     return 0;
 }
