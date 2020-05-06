@@ -2,19 +2,10 @@
 #include<vector>
 #include<string>
 #include<algorithm>
-#include<set>
 using namespace std;
 
-set<string> s;
-
-void dfs(const vector<int>& numbers, int m, vector<int>& ans){
+void dfs(const vector<int>& numbers, int m, vector<int>& ans, int idx){
     if(ans.size() == m){
-        string str;
-        for(int i=0; i<ans.size(); i++)
-            str += to_string(ans[i]);
-        if(s.find(str) != s.end()) return;
-
-        s.insert(str);
         for(int num : ans)
             cout<<num<<" ";
         cout<<"\n";
@@ -23,7 +14,7 @@ void dfs(const vector<int>& numbers, int m, vector<int>& ans){
 
     for(int i=0; i<numbers.size(); i++){
         ans.push_back(numbers[i]);
-        dfs(numbers,m,ans);
+        dfs(numbers,m,ans,i);
         ans.pop_back();
     }
 }
@@ -34,9 +25,10 @@ int main(){
     cin>>n>>m;
     for(int i=0,num; i<n; i++){
         cin>>num;
-        numbers.push_back(num);
+        if(find(numbers.begin(), numbers.end(), num) == numbers.end())
+            numbers.push_back(num);
     }
     sort(numbers.begin(), numbers.end());
-    dfs(numbers,m,ans);
+    dfs(numbers,m,ans,0);
     return 0;
 }
