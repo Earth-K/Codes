@@ -1,36 +1,22 @@
-#include<iostream>
+#include<cstdio>
 using namespace std;
-int arr[301][301],sum[301][301],N,M;
 
-int getAns(int i, int j, int x, int y){
-    int ret = 0;
-    for(int k=i; k<=x; k++){
-        ret += sum[k][y] - sum[k][j-1];
-    }
-    return ret;
-}
+int dp[301][301],N,M,T;
 
 int main(){
-    cin>>N>>M;
+    scanf("%d%d",&N,&M);
     for(int i=1; i<=N; i++){
-        for(int j=1 ;j<=M; j++){
-            cin>>arr[i][j];
+        for(int j=1,n; j<=M; j++){
+            scanf("%d",&n);
+            dp[i][j] = dp[i-1][j] + dp[i][j-1] - dp[i-1][j-1] + n;
         }
     }
-    
-    for(int i=1; i<=N; i++){
-        int s=0;
-        for(int j=1 ;j<=M; j++){
-            s += arr[i][j];
-            sum[i][j] = s;   
-        }
-    }
-
-    int T,i,j,x,y;
-    cin>>T;
+    scanf("%d",&T);
     while(T--){
-        cin>>i>>j>>x>>y;
-        cout<<getAns(i,j,x,y)<<"\n";
+        int i,j,x,y,ans;
+        scanf("%d%d%d%d",&i,&j,&x,&y);
+        ans = dp[x][y] - dp[i-1][y] - dp[x][j-1] + dp[i-1][j-1];
+        printf("%d\n",ans);
     }
     return 0;
 }
