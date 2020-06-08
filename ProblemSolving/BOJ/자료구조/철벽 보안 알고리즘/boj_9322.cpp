@@ -2,32 +2,28 @@
 #include<string>
 #include<vector>
 using namespace std;
+int T,n;
+string str[1000], pk[1000], ck[1000], ans[1000];
 int main(){
-    int T;
+    ios_base::sync_with_stdio(false), cin.tie(0);
     cin>>T;
     while(T--){
-        int n,conv[1000];
         cin>>n;
-        vector<vector<string>> vt(3);
-        for(int i=0; i<3; i++){
+        for(int i=0; i<n; i++)
+            cin>>str[i];
+        for(int i=0; i<n; i++)
+            cin>>pk[i];
+        for(int i=0; i<n; i++)
+            cin>>ck[i];
+        
+        for(int i=0; i<n; i++){
             for(int j=0; j<n; j++){
-                string s;
-                cin>>s;
-                vt[i].push_back(s);
-            }
-        }
-        for(int i=0; i<vt[0].size(); i++){
-            for(int j=0; j<vt[1].size(); j++){
-                if(vt[0][i].compare(vt[1][j]) == 0){
-                    conv[j] = i;
+                if(str[i] == pk[j]){
+                    ans[i] = ck[j];
                 }
             }
         }
-        vector<string> ans(vt[2]);
-        for(int i=0; i<vt[2].size(); i++){
-            ans[conv[i]] = vt[2][i];
-        }
-        for(int i=0; i<ans.size(); i++)
+        for(int i=0; i<n; i++)
             cout<<ans[i]<<" ";
         cout<<"\n";
     }
