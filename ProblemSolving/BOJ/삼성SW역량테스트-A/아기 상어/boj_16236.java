@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class Main {
+public class boj_16236 {
 	public static boolean[][] visited;
 	public static int N, baby_r, baby_c,baby_size,baby_exp;
 	public static int[][] map;
