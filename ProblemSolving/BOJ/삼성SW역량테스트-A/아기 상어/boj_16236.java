@@ -47,6 +47,7 @@ public class boj_16236 {
 		}
 		baby_size = 2;
 		baby_exp = 0;
+		sc.close();
 	}
 	public static void eatFish(Fish f) {
 		baby_r = f.r;
